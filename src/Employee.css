@@ -1,0 +1,83 @@
+.employee {
+  width:138px;
+  height:38px;
+  padding:10px;
+  float:left;
+  font-size:13px;
+  border-bottom:1px solid #ddd;
+  border-right:5px solid #ddd;
+}
+
+.employee-photo {
+  width:34px;
+  height:34px;
+  border:0px solid #ccc;
+  background:#f3f3f3;
+  border-radius: 100px;
+  float:left;
+  margin-right:12px;
+}
+.employee-photo i {
+
+  width:20px;
+  float:left;
+  font-size:20px;
+  margin:5px 0 0 8px;
+}
+
+.employee-firstname {
+  display:none;
+}
+
+.employee-id {
+  display:none;
+}
+
+.Brown {
+  background:brown;
+  color:white;
+}
+.Purple {
+  background:Purple;
+  color:white;
+}
+.Yellow {
+  background:Yellow;
+  color:white;
+}
+.Blue {
+  background:Blue;
+  color:white;
+}
+.Black {
+  background:Black;
+  color:white;
+}
+.Red {
+  background:Red;
+  color:white;
+}
+.Green {
+  background:Green;
+  color:white;
+}
+.Orange {
+  background:Orange;
+  color:white;
+}
+.Cyan {
+  background:Cyan;
+  color:white;
+}
+.Magenta {
+  background:Magenta;
+  color:white;
+}
+.Teal {
+  background:Teal;
+  color:white;
+}
+.Grey {
+  background:Grey;
+  color:white;
+}
