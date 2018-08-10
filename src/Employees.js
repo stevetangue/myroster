@@ -21,7 +21,7 @@ class Employees extends Component {
         console.log(pep);
         return (
           <div key={key} className="employee">
-            <div className={'employee-photo ' + pep.last_name}>
+            <div className={'employee-photo bg' + pep.last_name}>
               <i><FontAwesomeIcon icon={faUser} /></i>
             </div>
             <div className="employee-lastname">{pep.last_name}</div>

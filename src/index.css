@@ -14,11 +14,13 @@ body {
 }
 
 .col {
-  width:160px;
-  top:39px;
+  width:155px;
+  top:40px;
   position:absolute;
-  height:100%;
-  border:1px solid #ddd;
+  height:813px;
+  border:1px solid #199ED8;
+  border-right:5px solid #D6F0FE;
+  border-bottom:2px solid #199ED8;
 }
 
 .col b {
@@ -30,19 +32,12 @@ body {
   padding-top:16px;
   height:29px;
   float:left;
-  border-bottom:1px solid #ddd;
-  border-right:1px solid #ddd;
-
+  border-bottom:1px solid #199ED8;
+  border-right:1px solid #199ED8;
 }
-
-/* th {
-}
-th:first-child {
-     border-left:1px solid #ddd;
-} */
 
 .col-agenda {
-  padding-left:160px;
+  padding-left:161px;
 }
 
 th.agenda__cell.--controls button {
@@ -58,7 +53,43 @@ th.agenda__cell.--controls button {
 }
 
 .control-buttons {
-border-bottom:1px solid #ddd;
-padding-bottom:10px;
-padding-top:10px;
+  border-bottom:1px solid #199ED8;
+  padding-bottom:10px;
+  padding-top:10px;
+}
+
+table {
+  border:1px solid #199ED8;
+  border-bottom:1px solid #199ED8!important;
+}
+
+
+.agenda__cell {
+  border-bottom: 1px solid #E6F5FE;
+  border-right:1px solid #E6F5FE;
+  border-left: 0px solid #E6F5FE;
+  border-right:0px solid #E6F5FE;
+}
+
+.agenda__cell.--head {
+  border-right:1px solid #199ED8;
+  color:#348AD8;
+}
+
+.agenda__cell.\--time {
+  border:1px solid #199ED8!important;
+  border-top:0px solid #199ED8!important;
+  color:#3399FF;
+  font-weight:lighter;
+  font-size:12px;
+  text-align:right;
+  width:75px;
+  padding-right:25px;
+}
+
+.agenda__table.\--header .agenda__cell:first-child {
+  border:1px solid #199ED8;
+  border-top:0px solid #199ED8;
+  border-bottom:0px solid #199ED8;
+  color:#348AD8;
 }

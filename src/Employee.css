@@ -1,11 +1,15 @@
 .employee {
-  width:138px;
+  width:141px;
   height:38px;
-  padding:10px;
+  padding:10px 10px 6px 10px;
   float:left;
   font-size:13px;
-  border-bottom:1px solid #ddd;
-  border-right:5px solid #ddd;
+}
+.employee:hover {
+  background:#f3f3f3;
+}
+.employee:hover .employee-photo{
+  background:#ffffff;
 }
 
 .employee-photo {
@@ -15,14 +19,16 @@
   background:#f3f3f3;
   border-radius: 100px;
   float:left;
+  margin-left:10px;
   margin-right:12px;
 }
-.employee-photo i {
 
+.employee-photo i {
   width:20px;
   float:left;
   font-size:20px;
   margin:5px 0 0 8px;
+  color:#aaa;
 }
 
 .employee-firstname {
@@ -69,10 +75,6 @@
   background:Cyan;
   color:white;
 }
-.Magenta {
-  background:Magenta;
-  color:white;
-}
 .Teal {
   background:Teal;
   color:white;
@@ -80,4 +82,14 @@
 .Grey {
   background:Grey;
   color:white;
+}
+.bg {
+  background:#f3f3f3;
+}
+.Magenta {
+  background:Magenta;
+  color:white;
+}
+.selected {
+  background: #EF5AA1;
 }
