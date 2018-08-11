@@ -10,21 +10,6 @@ import moment from 'moment-timezone';
 import Employees from '../json/employees';
 require('moment/locale/en-au.js');
 
-
-let now = new Date();
-// Using moment-timezone lib to handle:
-// Australian Western Standard Time - AWST -  8:54 AM
-// Australian Eastern Standard Time - AEST - 10:54 AM
-let aug = moment("2018-06-18T05:00:00+00:00");
-aug.tz(Timezone.timezone).format('ha z');
-let newdatetz = moment(now);
-console.log('TODAY '+ Timezone.timezone+ ' AWST');
-console.log(now)
-console.log("TODAY Australia/Brisbane AEST");
-console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'));
-
-
-
 // roles 1,2,3 colors and 4 selected employees highlights
 let colors= {
   'color-1':"rgba(243, 143, 96, 1)" ,
@@ -33,44 +18,65 @@ let colors= {
   "color-4":"rgba(255, 105, 180, 1)" ,
 }
 
+let now = new Date();
+// Using moment-timezone lib to handle:
+// Australian Western Standard Time - AWST -  8:54 AM
+// Australian Eastern Standard Time - AEST - 10:54 AM
+// let aug = moment("2018-06-18T05:00:00+00:00");
+// aug.tz(Timezone.timezone).format('ha z');
+// let newdatetz = moment(now);
+// console.log('TODAY '+ Timezone.timezone+ ' AWST');
+// console.log(now)
+// console.log("TODAY Australia/Brisbane AEST");
+// console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'));
+
 
 let itemsObj = [];
 // restructure Shifts.json data provided to fit the react-agenda library
 // x56 Shifts per x13 employees
 Shifts.map((myshift, k) => {
-
+    // employee full name
     const employeeFullName = Employees.map((emp) => {
-      if(emp.id == myshift.employee_id) {
-        return emp.last_name+' '+emp.first_name;
+      if(emp.id === myshift.employee_id) {
+        if(emp.last_name === undefined || emp.last_name === undefined) {
+          console.log("Undefined value")
+        } else {
+          return emp.last_name+' '+emp.first_name;
+        }
       }
     });
-
+    // roles
     const employeeRole = Roles.map((role) => {
-      if(role.id == myshift.employee_id) {
-        return role.last_name+' '+role.first_name;
+      if(role.id === myshift.employee_id) {
+        return role.name+' '+role.id;
       }
     });
 
-    const selectedSally = (() => {
-      if (myshift.employee_id === "2635") {
-          console.log("SALLY")
-      }
-    })
+    // highlights sally in bright pink
+    let roleID = myshift.employee_id === 2635 ? 4 : myshift.role_id;
+
+    function setTZ(time) {
+      let newdatetz = moment(time);
+      return newdatetz.tz(Timezone.timezone).format('ddd MMM DD YYYY HH:mm:ss.SSSS');
+    }
+
+    console.log(setTZ(myshift.start_time));
+    console.log(new Date(myshift.start_time));
 
     itemsObj.push( {
       _id           : guid(),
       name          : employeeFullName,
       startDateTime : new Date(myshift.start_time),
       endDateTime   : new Date(myshift.end_time),
-      classes       : 'color-'+myshift.role_id+'',
+      classes       : ' color-'+roleID+'',
       role          : myshift.role_id,
+      role_id       : employeeRole,
       employee_id   : myshift.employee_id,
       shiftId       : myshift.id,
       breakDuration : myshift.break_duration,
     }
   );
 });
-
 
 // agenda items array obj structure used in the react-agenda library
 let items = itemsObj;
