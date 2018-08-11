@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Agenda from './agenda/agenda.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Employees from './Employees';
 
 class App extends Component {
@@ -9,7 +7,7 @@ class App extends Component {
     return (
       <div className="appcontainer">
         <div className="col">
-          <b><FontAwesomeIcon icon={faUser} /> Employee</b>
+          <b>Employee</b>
           <Employees />
         </div>
         <div className="col-agenda">

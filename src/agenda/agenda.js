@@ -38,20 +38,23 @@ Shifts.map((myshift, k) => {
     // employee full name
     const employeeFullName = Employees.map((emp) => {
       if(emp.id === myshift.employee_id) {
-        if(emp.last_name === undefined || emp.last_name === undefined) {
-          console.log("Undefined value")
-        } else {
-          return emp.last_name+' '+emp.first_name;
-        }
+        return emp.last_name+' '+emp.first_name;
       }
     });
-    // roles
-    const employeeRole = Roles.map((role) => {
-      if(role.id === myshift.employee_id) {
-        return role.name+' '+role.id;
-      }
+    let eFullName = employeeFullName.filter((e) => {
+      return e !== undefined;
     });
 
+    // roles
+    const employeeRole = Roles.map((role) => {
+      if(role.id === myshift.role_id) {
+        return role.name;
+      }
+    });
+    let eRole = employeeRole.filter((e) => {
+      return e !== undefined;
+    });
+    
     // highlights sally in bright pink
     let roleID = myshift.employee_id === 2635 ? 4 : myshift.role_id;
 
@@ -60,24 +63,26 @@ Shifts.map((myshift, k) => {
       return newdatetz.tz(Timezone.timezone).format('ddd MMM DD YYYY HH:mm:ss.SSSS');
     }
 
+
+
     console.log(setTZ(myshift.start_time));
     console.log(new Date(myshift.start_time));
 
     itemsObj.push( {
       _id           : guid(),
-      name          : employeeFullName,
+      name          : eFullName,
       startDateTime : new Date(myshift.start_time),
       endDateTime   : new Date(myshift.end_time),
       classes       : ' color-'+roleID+'',
-      role          : myshift.role_id,
-      role_id       : employeeRole,
+      roleIs        : myshift.role_id,
+      roleName      : eRole,
       employee_id   : myshift.employee_id,
       shiftId       : myshift.id,
       breakDuration : myshift.break_duration,
     }
   );
 });
-
+console.log(itemsObj);
 // agenda items array obj structure used in the react-agenda library
 let items = itemsObj;
 

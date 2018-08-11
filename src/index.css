@@ -136,3 +136,12 @@ th.agenda__cell.--controls button {
 :-ms-input-placeholder { /* Internet Explorer 10+ */
   color: transparent;
 }
+
+.agenda-item-description section {
+  color:#444;
+  font-weight:bold;
+}
+.agenda-item-description small {
+  color:#666;
+  font-weight:lighter;
+}
