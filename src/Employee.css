@@ -13,6 +13,64 @@
   cursor:pointer;
 }
 
+.employee:hover.bgWhite {
+  background:white; background:rgba(244,67,54,1);
+}
+.employee:hover.bgWhite div,
+.employee:hover.bgBrown div,
+.employee:hover.bgPurple div,
+.employee:hover.bgYellow div,
+.employee:hover.bgBlue div,
+.employee:hover.bgBlack div,
+.employee:hover.bgOrange div,
+.employee:hover.bgRed div,
+.employee:hover.bgCyan div
+ {
+  color:white;
+}
+.employee:hover.bgBrown {
+  background:rgba(233,30,99,1);
+}
+.employee:hover.bgPurple {
+  background:rgba(156,39,176,1);
+}
+.employee:hover.bgYellow {
+  background:rgba(103,58,183,1);
+}
+.employee:hover.bgBlue {
+  background:rgba(63,81,181,1);
+}
+.employee:hover.bgBlack {
+  background:rgba(33,150,243,1);
+}
+.employee:hover.bgRed {
+  background:rgba(3,169,244,1);
+}
+.employee:hover.bgGreen {
+  background:rgba(0,188,212,1);
+}
+.employee:hover.bgOrange {
+  background:rgba(0,150,136,1);
+}
+.employee:hover.bgCyan {
+  background:rgba(76,175,80,1);
+}
+.employee:hover.bgMagenta {
+  background:rgba(139,195,74,1);
+}
+.employee:hover.bgTeal {
+  background:rgba(205,220,57,1);
+}
+.employee:hover.bgGrey {
+  background:rgba(255,235,59,1);
+}
+
+
+
+
+.employee:hover i {
+  color:#666;
+}
 .employee:hover .employee-photo{
   background:#ffffff;
 }
@@ -33,7 +91,7 @@
   float:left;
   font-size:20px;
   margin:5px 0 0 8px;
-  color:#aaa;
+  color:#fff;
 }
 
 .employee-firstname {
@@ -44,57 +102,78 @@
   display:none;
 }
 
+.White {
+  background:white; background:rgba(244,67,54,1); //2634
+  color:white;
+}
 .Brown {
-  background:brown;
+  background:brown; background:rgba(233,30,99,1); //2635
   color:white;
 }
 .Purple {
-  background:Purple;
+  background:Purple; background:rgba(156,39,176,1); //2636
   color:white;
 }
 .Yellow {
-  background:Yellow;
+  background:Yellow; background:rgba(103,58,183,1); //2637
   color:white;
 }
 .Blue {
-  background:Blue;
+  background:Blue; background:rgba(63,81,181,1); //2639
   color:white;
 }
 .Black {
-  background:Black;
+  background:Black; background:rgba(33,150,243,1); //2640
   color:white;
 }
 .Red {
-  background:Red;
+  background:Red; background:rgba(3,169,244,1); //2641
   color:white;
 }
 .Green {
-  background:Green;
+  background:Green; background:rgba(0,188,212,1); //2642
   color:white;
 }
 .Orange {
-  background:Orange;
+  background:Orange; background:rgba(0,150,136,1); //2643
   color:white;
 }
 .Cyan {
-  background:Cyan;
+  background:Cyan; background:rgba(76,175,80,1); //2644
+  color:white;
+}
+.Magenta {
+  background:Magenta; background:rgba(139,195,74,1); //2645
   color:white;
 }
 .Teal {
-  background:Teal;
+  background:Teal; background:rgba(205,220,57,1); //2646
   color:white;
 }
 .Grey {
-  background:Grey;
+  background:Grey; background:rgba(255,235,59,1); //2647
   color:white;
 }
 .bg {
   background:#f3f3f3;
 }
-.Magenta {
-  background:Magenta;
-  color:white;
-}
+
 .selected {
   background: #EF5AA1;
 }
+
+/* https://www.materialui.co/colors
+rgba(244,67,54,1)
+rgba(233,30,99,1)
+rgba(156,39,176,1)
+rgba(103,58,183,1)
+rgba(63,81,181,1)
+rgba(33,150,243,1)
+rgba(3,169,244,1)
+rgba(0,188,212,1)
+rgba(0,150,136,1)
+rgba(76,175,80,1)
+rgba(139,195,74,1)
+rgba(205,220,57,1)
+rgba(255,235,59,1)
+*/

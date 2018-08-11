@@ -12,10 +12,26 @@ require('moment/locale/en-au.js');
 
 // roles 1,2,3 colors and 4 selected employees highlights
 let colors= {
-  'color-1':"rgba(243, 143, 96, 1)" ,
+  /*
+  "color-1":"rgba(243, 143, 96, 1)" ,
   "color-2":"rgba(245, 255, 162, 1)" ,
   "color-3":"rgba(191, 142, 241, 1)" ,
   "color-4":"rgba(255, 105, 180, 1)" ,
+  */
+
+  "color-2634":"rgba(244,67,54,1)" ,
+  "color-2635":"rgba(233,30,99,1)" ,
+  "color-2636":"rgba(156,39,176,1)" ,
+  "color-2637":"rgba(103,58,183,1)" ,
+  "color-2639":"rgba(63,81,181,1)" ,
+  "color-2640":"rgba(33,150,243,1)" ,
+  "color-2641":"rgba(3,169,244,1)" ,
+  "color-2642":"rgba(0,188,212,1)" ,
+  "color-2643":"rgba(0,150,136,1)" ,
+  "color-2644":"rgba(76,175,80,1)" ,
+  "color-2645":"rgba(139,195,74,1)" ,
+  "color-2646":"rgba(205,220,57,1)" ,
+  "color-2647":"rgba(255,235,59,1)"
 }
 
 let now = new Date();
@@ -37,9 +53,10 @@ let itemsObj = [];
 Shifts.map((myshift, k) => {
     // employee full name
     const employeeFullName = Employees.map((emp) => {
-      if(emp.id === myshift.employee_id) {
-        return emp.last_name+' '+emp.first_name;
-      }
+        if(emp.id === myshift.employee_id) {
+          return emp.last_name+' '+emp.first_name;
+        }
+        return console.log();//removed warning - todo:refactor
     });
     let eFullName = employeeFullName.filter((e) => {
       return e !== undefined;
@@ -50,20 +67,21 @@ Shifts.map((myshift, k) => {
       if(role.id === myshift.role_id) {
         return role.name;
       }
+      return console.log();//removed warning - todo:refactor
     });
     let eRole = employeeRole.filter((e) => {
       return e !== undefined;
     });
-    
+
     // highlights sally in bright pink
-    let roleID = myshift.employee_id === 2635 ? 4 : myshift.role_id;
+    //let roleID = myshift.employee_id === 2635 ? 4 : myshift.role_id;
+    //let roleID = myshift.role_id;
 
     function setTZ(time) {
       let newdatetz = moment(time);
-      return newdatetz.tz(Timezone.timezone).format('ddd MMM DD YYYY HH:mm:ss.SSSS');
+      return newdatetz.tz(Timezone.timezone).format('ddd MMM DD YYYY HH:mm:ss ');
+      //2018-06-18T00:00:00+00:00
     }
-
-
 
     console.log(setTZ(myshift.start_time));
     console.log(new Date(myshift.start_time));
@@ -73,7 +91,7 @@ Shifts.map((myshift, k) => {
       name          : eFullName,
       startDateTime : new Date(myshift.start_time),
       endDateTime   : new Date(myshift.end_time),
-      classes       : ' color-'+roleID+'',
+      classes       : ' color-'+myshift.employee_id+'',
       roleIs        : myshift.role_id,
       roleName      : eRole,
       employee_id   : myshift.employee_id,
@@ -81,8 +99,9 @@ Shifts.map((myshift, k) => {
       breakDuration : myshift.break_duration,
     }
   );
+  return itemsObj;
 });
-console.log(itemsObj);
+
 // agenda items array obj structure used in the react-agenda library
 let items = itemsObj;
 
