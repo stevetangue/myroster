@@ -33,19 +33,17 @@ let colors= {
   "color-2646":"rgba(205,220,57,1)" ,
   "color-2647":"rgba(255,235,59,1)"
 }
-
+// Today' s Date now
 let now = new Date();
 // Using moment-timezone lib to handle:
 // Australian Western Standard Time - AWST -  8:54 AM
 // Australian Eastern Standard Time - AEST - 10:54 AM
-// let aug = moment("2018-06-18T05:00:00+00:00");
-// aug.tz(Timezone.timezone).format('ha z');
-// let newdatetz = moment(now);
-// console.log('TODAY '+ Timezone.timezone+ ' AWST');
-// console.log(now)
-// console.log("TODAY Australia/Brisbane AEST");
-// console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'));
-
+let aug = moment(now);
+aug.tz(Timezone.timezone).format('ha z');
+let newdatetz = moment('2018-06-18T00:00:00+00:00');
+// Display in web browser console today AWST date and time
+console.log('TODAY '+ Timezone.timezone+ ' AWST');
+console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'));
 
 let itemsObj = [];
 // restructure Shifts.json data provided to fit the react-agenda library
@@ -77,20 +75,20 @@ Shifts.map((myshift, k) => {
     //let roleID = myshift.employee_id === 2635 ? 4 : myshift.role_id;
     //let roleID = myshift.role_id;
 
-    function setTZ(time) {
-      let newdatetz = moment(time);
-      return newdatetz.tz(Timezone.timezone).format('ddd MMM DD YYYY HH:mm:ss ');
-      //2018-06-18T00:00:00+00:00
-    }
-
-    console.log(setTZ(myshift.start_time));
-    console.log(new Date(myshift.start_time));
+    // Timezone config
+    let startDateTz = moment(myshift.start_time);
+    let endDateTz = moment(myshift.end_time);
+    let newStartDate = startDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
+    let newEndDate = endDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
+    //new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
+    //console.log(newStartDate); AWST
+    //console.log(newEndDate); AWST
 
     itemsObj.push( {
       _id           : guid(),
       name          : eFullName,
-      startDateTime : new Date(myshift.start_time),
-      endDateTime   : new Date(myshift.end_time),
+      startDateTime : new Date(newStartDate),
+      endDateTime   : new Date(newEndDate),
       classes       : ' color-'+myshift.employee_id+'',
       roleIs        : myshift.role_id,
       roleName      : eRole,
@@ -105,6 +103,8 @@ Shifts.map((myshift, k) => {
 // agenda items array obj structure used in the react-agenda library
 let items = itemsObj;
 
+//console.log(items);
+
 export default class Agenda extends Component {
     constructor(props){
     super(props);
@@ -117,10 +117,10 @@ export default class Agenda extends Component {
       locale:"eng",
       rowsPerHour:2,
       numberOfDays:7,
-      startDate: new Date('2018-06-18T00:00:00+00:00')
+      startDate: newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ')
     }
 
-    //console.log(this.state.items);
+    console.log(this.state);
     this.handleRangeSelection = this.handleRangeSelection.bind(this)
     this.handleItemEdit = this.handleItemEdit.bind(this)
     this._openModal = this._openModal.bind(this)
