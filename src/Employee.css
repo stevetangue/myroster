@@ -5,9 +5,14 @@
   float:left;
   font-size:13px;
 }
+
 .employee:hover {
   background:#f3f3f3;
+  border-right:6px solid #FEB7D6;
+  width:135px;
+  cursor:pointer;
 }
+
 .employee:hover .employee-photo{
   background:#ffffff;
 }

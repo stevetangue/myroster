@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import EmployeesData from './json/employees';
-import Timezone from './json/config';
-import roles from './json/roles';
-import Shifts from './json/shifts';
 import './Employee.css';
 
 class Employees extends Component {
@@ -18,7 +15,6 @@ class Employees extends Component {
   render() {
     return (
       this.state.employees.map((pep, key) => {
-        console.log(pep);
         return (
           <div key={key} className="employee">
             <div className={'employee-photo bg' + pep.last_name}>

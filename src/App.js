@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Agenda from './agenda/agenda.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';

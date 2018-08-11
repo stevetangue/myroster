@@ -59,21 +59,24 @@ th.agenda__cell.--controls button {
 }
 
 table {
-  border:1px solid #199ED8;
   border-bottom:1px solid #199ED8!important;
+  border-right:1px solid #199ED8!important;
 }
 
-
 .agenda__cell {
-  border-bottom: 1px solid #E6F5FE;
-  border-right:1px solid #E6F5FE;
-  border-left: 0px solid #E6F5FE;
+  padding-top:1px;
+  border-bottom:0px solid #E6F5FE;
   border-right:0px solid #E6F5FE;
+  border-left: 0px solid #E6F5FE;
 }
 
 .agenda__cell.--head {
   border-right:1px solid #199ED8;
   color:#348AD8;
+}
+
+.agenda__cell.--head:last-child {
+  border-right:0px solid #199ED8;
 }
 
 .agenda__cell.\--time {
@@ -92,4 +95,16 @@ table {
   border-top:0px solid #199ED8;
   border-bottom:0px solid #199ED8;
   color:#348AD8;
+}
+
+
+.btn-add-shift {
+  width:20px;
+  height:20px;
+  background:#0099FF;
+  color:white;
+  border:none;
+  border-radius:100px;
+  padding:4px;
+  font-size:10px;
 }
