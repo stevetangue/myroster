@@ -42,8 +42,8 @@ let aug = moment(now);
 aug.tz(Timezone.timezone).format('ha z');
 let newdatetz = moment('2018-06-18T00:00:00+00:00');
 // Display in web browser console today AWST date and time
-console.log('TODAY '+ Timezone.timezone+ ' AWST');
-console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'));
+console.log(''+ Timezone.timezone+ ' AWST');
+console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss Z zz'));
 
 let itemsObj = [];
 // restructure Shifts.json data provided to fit the react-agenda library
@@ -102,8 +102,6 @@ Shifts.map((myshift, k) => {
 
 // agenda items array obj structure used in the react-agenda library
 let items = itemsObj;
-
-//console.log(items);
 
 export default class Agenda extends Component {
     constructor(props){

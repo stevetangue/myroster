@@ -16,7 +16,11 @@ class Employees extends Component {
     return (
       this.state.employees.map((pep, key) => {
         return (
-          <div key={key} className={'employee bg' + pep.last_name}>
+          <div
+            key={key}
+            className={'employee bg' + pep.last_name}
+            onClick={() => alert(pep.first_name + ' clicked //TODO display her/his shift only')}
+            >
             <div className={'employee-photo ' + pep.last_name}>
               <i><FontAwesomeIcon icon={faUser} /></i>
             </div>
