@@ -7,7 +7,7 @@ make sure you have npm install globally at root directory run command
 - npm start
 
 
-//TODO fix timezone
+~~~//TODO fix timezone~~~
 
 //TODO
-Enable filter type functionality - when selecting Employee all shifts should hide and only current selected employee shifts should be displayed
+Enable filter type functionality - when selecting Employee all shifts should hide and only selected employee's shifts should be displayed

@@ -5,10 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Timezone from '../json/config';
 import Roles from '../json/roles';
+//import Shifts from '../json/shiftsSally'; for test
 import Shifts from '../json/shifts';
 import moment from 'moment-timezone';
 import Employees from '../json/employees';
+
 require('moment/locale/en-au.js');
+
+
+
 
 // roles 1,2,3 colors and 4 selected employees highlights
 let colors= {
@@ -45,6 +50,11 @@ let newdatetz = moment('2018-06-18T00:00:00+00:00');
 console.log(''+ Timezone.timezone+ ' AWST');
 console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss Z zz'));
 
+// Use timezone offset to calculate the correct AWST time
+let localOffset = now.getTimezoneOffset(); //-600
+let tzOffset = newdatetz.tz(Timezone.timezone)._offset; //480
+let timezoneOffset = localOffset + tzOffset;
+
 let itemsObj = [];
 // restructure Shifts.json data provided to fit the react-agenda library
 // x56 Shifts per x13 employees
@@ -76,19 +86,20 @@ Shifts.map((myshift, k) => {
     //let roleID = myshift.role_id;
 
     // Timezone config
-    let startDateTz = moment(myshift.start_time);
-    let endDateTz = moment(myshift.end_time);
-    let newStartDate = startDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
-    let newEndDate = endDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
-    //new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
-    console.log(newStartDate.toLocaleString('en-AU', { timeZone: 'Australia/Perth' }));
-    //console.log(newEndDate); AWST
+    // let startDateTz = moment(myshift.start_time);
+    // let endDateTz = moment(myshift.end_time);
+    // let newStartDate = startDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
+    // let newEndDate = endDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
+    // //new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
+    // console.log(newStartDate.toLocaleString('en-AU', { timeZone: 'Australia/Perth' }));
+    let datenowstart = new Date(myshift.start_time);
+    let datenowend = new Date(myshift.end_time);
 
     itemsObj.push( {
       _id           : guid(),
       name          : eFullName,
-      startDateTime : new Date(newStartDate),
-      endDateTime   : new Date(newEndDate),
+      startDateTime : new Date(datenowstart.getFullYear(), datenowstart.getMonth(), datenowstart.getDate(), datenowstart.getHours() + timezoneOffset / 60, datenowstart.getMinutes()),
+      endDateTime   : new Date(datenowend.getFullYear(), datenowend.getMonth(), datenowend.getDate(), datenowend.getHours() + timezoneOffset / 60, datenowend.getMinutes()),
       classes       : ' color-'+myshift.employee_id+'',
       roleIs        : myshift.role_id,
       roleName      : eRole,
@@ -112,13 +123,12 @@ export default class Agenda extends Component {
       selected:[],
       cellHeight:(60 / 4),
       showModal:false,
-      locale:"eng",
+      locale:"en",
       rowsPerHour:2,
       numberOfDays:7,
       startDate: newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ')
     }
 
-    console.log(this.state);
     this.handleRangeSelection = this.handleRangeSelection.bind(this)
     this.handleItemEdit = this.handleItemEdit.bind(this)
     this._openModal = this._openModal.bind(this)
