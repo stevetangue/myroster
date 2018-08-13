@@ -102,55 +102,55 @@
   display:none;
 }
 
-.White {
+.White, .color-2634 {
   background:white; background:rgba(244,67,54,1); //2634
   color:white;
 }
-.Brown {
+.Brown, .color-2635 {
   background:brown; background:rgba(233,30,99,1); //2635
   color:white;
 }
-.Purple {
+.Purple, .color-2636 {
   background:Purple; background:rgba(156,39,176,1); //2636
   color:white;
 }
-.Yellow {
+.Yellow, .color-2637 {
   background:Yellow; background:rgba(103,58,183,1); //2637
   color:white;
 }
-.Blue {
+.Blue, .color-2639 {
   background:Blue; background:rgba(63,81,181,1); //2639
   color:white;
 }
-.Black {
+.Black, .color-2640 {
   background:Black; background:rgba(33,150,243,1); //2640
   color:white;
 }
-.Red {
+.Red, .color-2641{
   background:Red; background:rgba(3,169,244,1); //2641
   color:white;
 }
-.Green {
+.Green, .color-2642 {
   background:Green; background:rgba(0,188,212,1); //2642
   color:white;
 }
-.Orange {
+.Orange, .color-2643 {
   background:Orange; background:rgba(0,150,136,1); //2643
   color:white;
 }
-.Cyan {
+.Cyan, .color-2644 {
   background:Cyan; background:rgba(76,175,80,1); //2644
   color:white;
 }
-.Magenta {
+.Magenta, .color-2645 {
   background:Magenta; background:rgba(139,195,74,1); //2645
   color:white;
 }
-.Teal {
+.Teal, .color-2646 {
   background:Teal; background:rgba(205,220,57,1); //2646
   color:white;
 }
-.Grey {
+.Grey, .color-2647 {
   background:Grey; background:rgba(255,235,59,1); //2647
   color:white;
 }
