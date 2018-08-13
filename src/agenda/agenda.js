@@ -81,7 +81,7 @@ Shifts.map((myshift, k) => {
     let newStartDate = startDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
     let newEndDate = endDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
     //new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
-    //console.log(newStartDate); AWST
+    console.log(newStartDate.toLocaleString('en-AU', { timeZone: 'Australia/Perth' }));
     //console.log(newEndDate); AWST
 
     itemsObj.push( {
