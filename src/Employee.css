@@ -28,7 +28,7 @@
  {
   color:white;
 }
-.employee:hover.bgBrown {
+.employee:hover.bgBrown, .selected {
   background:rgba(233,30,99,1);
 }
 .employee:hover.bgPurple {

@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import EmployeesData from './json/employees';
 import './Employee.css';
 
 class Employees extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      employees: EmployeesData,
-    };
-  }
-
   render() {
     return (
-      this.state.employees.map((pep, key) => {
+      this.props.employeeData.map((pep, key) => {
         return (
           <div
             key={key}
             className={'employee bg' + pep.last_name}
-            onClick={() => alert(pep.first_name + ' clicked //TODO display her/his shift only')}
+            onClick={this.props.onClick}
             >
             <div className={'employee-photo ' + pep.last_name}>
               <i><FontAwesomeIcon icon={faUser} /></i>

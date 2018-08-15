@@ -1,19 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import { ReactAgenda , ReactAgendaCtrl, guid, Modal } from 'react-agenda';
+import { ReactAgenda , ReactAgendaCtrl, Modal } from 'react-agenda';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Timezone from '../json/config';
-import Roles from '../json/roles';
-//import Shifts from '../json/shiftsSally'; for test
-import Shifts from '../json/shifts';
 import moment from 'moment-timezone';
-import Employees from '../json/employees';
-
 require('moment/locale/en-au.js');
-
-
-
 
 // roles 1,2,3 colors and 4 selected employees highlights
 let colors= {
@@ -43,76 +35,8 @@ let now = new Date();
 // Using moment-timezone lib to handle:
 // Australian Western Standard Time - AWST -  8:54 AM
 // Australian Eastern Standard Time - AEST - 10:54 AM
-let aug = moment(now);
-aug.tz(Timezone.timezone).format('ha z');
 let newdatetz = moment('2018-06-18T00:00:00+00:00');
-// Display in web browser console today AWST date and time
-console.log(''+ Timezone.timezone+ ' AWST');
-console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss Z zz'));
-
-// Use timezone offset to calculate the correct AWST time
-let localOffset = now.getTimezoneOffset(); //-600
-let tzOffset = newdatetz.tz(Timezone.timezone)._offset; //480
-let timezoneOffset = localOffset + tzOffset;
-
-let itemsObj = [];
-// restructure Shifts.json data provided to fit the react-agenda library
-// x56 Shifts per x13 employees
-Shifts.map((myshift, k) => {
-    // employee full name
-    const employeeFullName = Employees.map((emp) => {
-        if(emp.id === myshift.employee_id) {
-          return emp.last_name+' '+emp.first_name;
-        }
-        return console.log();//removed warning - todo:refactor
-    });
-    let eFullName = employeeFullName.filter((e) => {
-      return e !== undefined;
-    });
-
-    // roles
-    const employeeRole = Roles.map((role) => {
-      if(role.id === myshift.role_id) {
-        return role.name;
-      }
-      return console.log();//removed warning - todo:refactor
-    });
-    let eRole = employeeRole.filter((e) => {
-      return e !== undefined;
-    });
-
-    // highlights sally in bright pink
-    //let roleID = myshift.employee_id === 2635 ? 4 : myshift.role_id;
-    //let roleID = myshift.role_id;
-
-    // Timezone config
-    // let startDateTz = moment(myshift.start_time);
-    // let endDateTz = moment(myshift.end_time);
-    // let newStartDate = startDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
-    // let newEndDate = endDateTz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
-    // //new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
-    // console.log(newStartDate.toLocaleString('en-AU', { timeZone: 'Australia/Perth' }));
-    let datenowstart = new Date(myshift.start_time);
-    let datenowend = new Date(myshift.end_time);
-
-    itemsObj.push( {
-      _id           : guid(),
-      name          : eFullName,
-      startDateTime : new Date(datenowstart.getFullYear(), datenowstart.getMonth(), datenowstart.getDate(), datenowstart.getHours() + timezoneOffset / 60, datenowstart.getMinutes()),
-      endDateTime   : new Date(datenowend.getFullYear(), datenowend.getMonth(), datenowend.getDate(), datenowend.getHours() + timezoneOffset / 60, datenowend.getMinutes()),
-      classes       : ' color-'+myshift.employee_id+'',
-      roleIs        : myshift.role_id,
-      roleName      : eRole,
-      employee_id   : myshift.employee_id,
-      shiftId       : myshift.id,
-      breakDuration : myshift.break_duration,
-    }
-  );
-  return itemsObj;
-});
-
-// agenda items array obj structure used in the react-agenda library
-let items = itemsObj;
+// console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'));
 
 export default class Agenda extends Component {
     constructor(props){
@@ -126,8 +50,10 @@ export default class Agenda extends Component {
       locale:"en",
       rowsPerHour:2,
       numberOfDays:7,
-      startDate: newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ')
-    }
+      startDate: newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'),
+      isClicked: this.props.isClicked
+    };
+
 
     this.handleRangeSelection = this.handleRangeSelection.bind(this)
     this.handleItemEdit = this.handleItemEdit.bind(this)
@@ -140,6 +66,7 @@ export default class Agenda extends Component {
   }
 
   componentDidMount(){
+    let items = this.props.itemObj;
     this.setState({items:items})
   }
 
