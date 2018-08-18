@@ -4,7 +4,7 @@ import Employees from './Employees';
 import EmployeesData from './json/employees';
 import Timezone from './json/config';
 import Roles from './json/roles';
-//import SallyShifts from './json/shiftsSally';
+import SallyShifts from './json/shiftsSally';
 import Shifts from './json/shifts';
 import moment from 'moment-timezone';
 import { guid } from 'react-agenda';
@@ -32,42 +32,38 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemsObjData: [],
+      itemsObjData: this.restructureData(Shifts),
       isClicked: false,
       classNameSelected: '',
       employeeData: EmployeesData,
     }
   }
 
-  restructureData() {
+  restructureData(sh) {
     let objData = [];
-    Shifts.map((myshift, k) => {
+    sh.map((myshift, k) => {
     // employee full name
-    const employeeFullName = EmployeesData.map((emp) => {
-        if(emp.id === myshift.employee_id) {
-          return emp.last_name+' '+emp.first_name;
-        }
-        return console.log();//removed warning - todo:refactor
+    const employeeFullName = EmployeesData.map(emp => {
+        let efullName = emp.id === myshift.employee_id ? emp.last_name+' '+emp.first_name : '';
+        return efullName;
     });
-    let eFullName = employeeFullName.filter((e) => {
-      return e !== undefined;
+    let fullName = employeeFullName.filter(e => {
+      return e !== '';
     });
-    // // roles
-    const employeeRole = Roles.map((role) => {
-      if(role.id === myshift.role_id) {
-        return role.name;
-      }
-      return console.log();//removed warning - todo:refactor
+    //roles
+    const employeeRole = Roles.map(role => {
+      let roleName = role.id === myshift.role_id ? role.name : '';
+      return roleName;
     });
-    let eRole = employeeRole.filter((e) => {
-      return e !== undefined;
+    let eRole = employeeRole.filter(e => {
+      return e !== '';
     });
 
     let datenowstart = new Date(myshift.start_time);
     let datenowend = new Date(myshift.end_time);
-      objData.push({
+    return objData.push({
         _id           : guid(),
-        name          : eFullName[0],
+        name          : fullName[0],
         startDateTime : new Date(datenowstart.getFullYear(), datenowstart.getMonth(), datenowstart.getDate(), datenowstart.getHours() + timezoneOffset / 60, datenowstart.getMinutes()),
         endDateTime   : new Date(datenowend.getFullYear(), datenowend.getMonth(), datenowend.getDate(), datenowend.getHours() + timezoneOffset / 60, datenowend.getMinutes()),
         classes       : ' color-'+myshift.employee_id+'',
@@ -77,7 +73,6 @@ class App extends Component {
         shiftId       : myshift.id,
         breakDuration : myshift.break_duration,
       });
-      return <div></div>;
     });
     return objData;
   }
@@ -93,12 +88,13 @@ class App extends Component {
   render() {
     const isClicked = this.state.isClicked;
     const employeeData = this.state.employeeData;
-    const itemsObjData = this.restructureData();
+    let itemsObjData = this.state.itemsObjData;
     const selected = this.state.classNameSelected;
-    if(isClicked === true) {
-      console.log(isClicked);
-    }
 
+    if(isClicked === true) {
+      itemsObjData = this.restructureData(SallyShifts);
+    }
+    
     return (
       <div className="appcontainer">
         <div className="col">
