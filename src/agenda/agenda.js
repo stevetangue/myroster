@@ -39,70 +39,62 @@ let newdatetz = moment('2018-06-18T00:00:00+00:00');
 // console.log(newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'));
 
 export default class Agenda extends Component {
-    constructor(props){
-    super(props);
+  state = {
+    items:[],
+    selected:[],
+    cellHeight:(60 / 4),
+    showModal:false,
+    locale:"en",
+    rowsPerHour:2,
+    numberOfDays:7,
+    startDate: newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'),
+    isClicked:this.props.isClicked
+  };
 
-    this.state = {
-      items:[],
-      selected:[],
-      cellHeight:(60 / 4),
-      showModal:false,
-      locale:"en",
-      rowsPerHour:2,
-      numberOfDays:7,
-      startDate: newdatetz.tz(Timezone.timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ'),
+  handleClickEmployee = () => {
+    console.log("event handler called");
+  };
+
+  componentDidMount = () => {
+    this.setState({
+      items:this.props.itemObj,
       isClicked: this.props.isClicked
-    };
+    })
+  };
 
-
-    this.handleRangeSelection = this.handleRangeSelection.bind(this)
-    this.handleItemEdit = this.handleItemEdit.bind(this)
-    this._openModal = this._openModal.bind(this)
-    this._closeModal = this._closeModal.bind(this)
-    this.addNewEvent = this.addNewEvent.bind(this)
-    this.removeEvent = this.removeEvent.bind(this)
-    this.editEvent = this.editEvent.bind(this)
-    this.handleCellSelection = this.handleCellSelection.bind(this)
-  }
-
-  componentDidMount(){
-    let items = this.props.itemObj;
-    this.setState({items:items})
-  }
-
-  componentWillReceiveProps(next , last){
+  componentWillReceiveProps = (next , last) => {
     if(next.items){
       this.setState({items:next.items})
     }
-  }
+  };
 
-  handleItemEdit(item, openModal) {
+  handleItemEdit = (item, openModal) => {
     if(item && openModal === true){
       this.setState({selected:[item] })
       return this._openModal();
     }
-  }
+  };
 
-  handleCellSelection(item, openModal) {
+  handleCellSelection = (item, openModal) => {
     if(this.state.selected && this.state.selected[0] === item){
       return  this._openModal();
     }
        this.setState({selected:[item] })
-  }
+  };
 
-  handleDateRangeChange (startDate, endDate) {
+  handleDateRangeChange = (startDate, endDate) => {
       this.setState({startDate:startDate })
-  }
+  };
 
-  handleRangeSelection (selected) {
+  handleRangeSelection = selected => {
     this.setState({selected:selected , showCtrl:true})
     this._openModal();
-  }
+  };
 
-  _openModal(){
+  _openModal = () => {
     this.setState({showModal:true})
   }
-  _closeModal(e){
+  _closeModal = e => {
     if(e){
       e.stopPropagation();
       e.preventDefault();
@@ -110,24 +102,24 @@ export default class Agenda extends Component {
       this.setState({showModal:false})
   }
 
-  handleItemChange(items , item){
+  handleItemChange = (items , item) => {
     this.setState({items:items})
   }
 
-  handleItemSize(items , item){
+  handleItemSize = (items , item) => {
     this.setState({items:items})
   }
 
-  removeEvent(items , item){
+  removeEvent = (items , item) =>{
       this.setState({ items:items});
   }
 
-  addNewEvent (items , newItems){
+  addNewEvent = (items , newItems) => {
     this.setState({showModal:false ,selected:[] , items:items});
     this._closeModal();
   }
 
-  editEvent (items , item){
+  editEvent = (items , item) => {
     this.setState({showModal:false ,selected:[] , items:items});
     this._closeModal();
   }

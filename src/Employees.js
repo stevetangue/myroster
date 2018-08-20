@@ -5,20 +5,22 @@ import './Employee.css';
 
 class Employees extends Component {
   render() {
+    const { employeeData, onSelectedClick } = this.props;
     return (
-      this.props.employeeData.map((pep, key) => {
+        employeeData.map((pep, key) => {
+        const { last_name, id, first_name} = pep;
         return (
           <div
             key={key}
-            className={'employee bg' + pep.last_name}
-            onClick={this.props.onClick}
+            className={'employee bg' + last_name}
+            onClick={() => onSelectedClick(id)}
             >
-            <div className={'employee-photo ' + pep.last_name}>
+            <div className={'employee-photo ' + last_name}>
               <i><FontAwesomeIcon icon={faUser} /></i>
             </div>
-            <div className="employee-lastname">{pep.last_name}</div>
-            <div className="employee-firsname">{pep.first_name}</div>
-            <div className="employee-id"> {pep.id}</div>
+            <div className="employee-lastname">{last_name}</div>
+            <div className="employee-firsname">{first_name}</div>
+            <div className="employee-id"> {id}</div>
           </div>
         );
       })
