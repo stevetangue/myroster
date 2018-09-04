@@ -38,18 +38,17 @@ class App extends Component {
     let objData = [];
     sh.map((myshift, k) => {
       // employee full name
-      const employeeFullName = EmployeesData.map(emp => {
-        return emp.id === myshift.employee_id ? emp.last_name + " " + emp.first_name : "";
-      }).filter(e => {
-        return e !== "";
-      });
+      const employeeFullName = EmployeesData.map(
+        emp =>
+          emp.id === myshift.employee_id
+            ? `${emp.last_name} ${emp.first_name}`
+            : ""
+      ).filter(e => e !== "");
 
       //roles
-      const employeeRole = Roles.map(role => {
-        return role.id === myshift.role_id ? role.name : "";
-      }).filter(e => {
-        return e !== "";
-      });
+      const employeeRole = Roles.map(
+        role => (role.id === myshift.role_id ? role.name : "")
+      ).filter(e => e !== "");
 
       let datenowstart = new Date(myshift.start_time);
       let datenowend = new Date(myshift.end_time);
@@ -81,7 +80,7 @@ class App extends Component {
     return objData;
   }
 
-  handleOnClick = (e) => {
+  handleOnClick = e => {
     const isClicka = [...this.state.isClicked];
     this.setState({
       isClicked: true
@@ -90,7 +89,12 @@ class App extends Component {
   };
 
   render() {
-    const {classNameSelected, employeeData, itemsObjData, isClicked } = this.state;
+    const {
+      classNameSelected,
+      employeeData,
+      itemsObjData,
+      isClicked
+    } = this.state;
     return (
       <div className="appcontainer">
         <div className="col">
