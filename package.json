@@ -10,7 +10,7 @@
     "i": "^0.3.6",
     "jstz": "^2.0.0",
     "moment": "^2.22.2",
-    "moment-timezone": "^0.5.21",
+    "moment-timezone": "^0.5.35",
     "npm": "^6.14.6",
     "react": "^16.4.2",
     "react-agenda": "0.0.7",
